@@ -1,0 +1,46 @@
+<div class="main">
+  <div class="sidebar">
+
+    <div class="app-name">
+      <h2>Messenger App</h2>
+    </div>
+
+    <div class="channel-list">
+      <div class="list-head">Channels</div>
+      <div class="channel nav-pills" ng-repeat="channel in channelsController.channels">
+        <a ui-sref="channels.messages({channelId: channel.$id})" ui-sref-active="selected"># {{ channel.name }}</a>
+      </div>
+
+      <div class="channel create">
+        <a ui-sref="channels.create">+ create channel</a>
+      </div>
+      
+      <div class="list-head">Direct Messages</div>
+      <div class="channel" ng-repeat="user in channelsController.users">
+        <a ng-if="user.$id !== channelsController.profile.$id" ui-sref="channels.direct({uid: user.$id})" ui-sref-active="selected">
+          {{ user.displayName }}
+        </a>
+      </div>
+      
+    </div>
+
+    <div class="my-info">
+      <img class="user-pic" ng-src="{{ channelsController.getIcon(channelsController.profile.$id) }}" />
+      <div class="user-info">
+        <div class="user-name">
+          {{ channelsController.profile.displayName }}
+        </div>
+
+        <div class="options">
+          <a ui-sref="profile">edit profile</a>
+          /
+          <a href="#" ng-click="channelsController.logout()">logout</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="message-pane">
+    <ui-view></ui-view>
+  </div>
+</div>
