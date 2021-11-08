@@ -10,8 +10,19 @@
     </p>
 
     <div class="input-group">
-      <input required type="text" class="form-control" placeholder="Display Name" ng-model="profileController.profile.displayName">
+      Display name: <input required type="text" class="form-control" placeholder="Display Name" ng-model="profileController.profile.displayName">
     </div>
-    <input type="submit" class="btn btn-default" value="Set Display Name">
+
+    <div class="input-group" ng-hide="!profileController.profile.displayName">
+      Name: <input required type="text" class="form-control" placeholder="Name" ng-model="profileController.profile.fullName">
+    </div>
+    <div class="input-group" ng-hide="!profileController.profile.displayName">
+      Phone number: <input required type="text" class="form-control" placeholder="Phone number" ng-model="profileController.profile.phoneNumber">
+    </div>
+    <div class="input-group" ng-hide="!profileController.profile.displayName">
+      Favorite food: <input required type="text" class="form-control" placeholder="Favorite food" ng-model="profileController.profile.favoriteFood">
+    </div>
+    <input type="submit" class="btn btn-default" value="Update Profile">
+    <input class="btn btn-default" value="Cancel" ui-sref="channels">
   </form>
 </div>

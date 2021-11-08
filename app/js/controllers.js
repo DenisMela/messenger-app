@@ -10,15 +10,15 @@ angular.module('myApp.controllers', [])
 
   authController.login = function (){
     Auth.$signInWithEmailAndPassword(authController.user.email, authController.user.password)
-    .then((auth) => {
+    .then(function(auth) {
       $state.go('channels');
-    }).catch((error) => {
+    }).catch(function(error) {
       authController.error = error;
     })
   };
 
   authController.register = function (){
-    Auth.$createUserWithEmailAndPassword(authController.user.email, authController.user.password).then(function (user){
+    return Auth.$createUserWithEmailAndPassword(authController.user.email, authController.user.password).then(function (user){
       $state.go('channels');
     }, function (error){
       authController.error = error;
@@ -33,7 +33,7 @@ angular.module('myApp.controllers', [])
 
   profileController.updateProfile = function() {
     profileController.profile.emailHash = md5.createHash(auth.email);
-    profileController.profile.$save().then(() => {
+    profileController.profile.$save().then(function()  {
       $state.go('channels');
     });
   };
@@ -52,13 +52,13 @@ angular.module('myApp.controllers', [])
   };
 
   channelsController.logout = function() {
-    Auth.$signOut().then(() => {
+    Auth.$signOut().then(function() {
       $state.go('home');
     });
   };
 
   channelsController.createChannel = function() {
-    channelsController.channels.$add(channelsController.newChannel).then((ref) => {
+    channelsController.channels.$add(channelsController.newChannel).then(function(ref) {
       $state.go('channels.messages', {channelId: ref.key});
     });
   };
@@ -78,7 +78,7 @@ angular.module('myApp.controllers', [])
         body: messagesController.message,
         timestamp: firebase.database.ServerValue.TIMESTAMP
       })
-      .then(() => {
+      .then(function() {
         messagesController.message = '';
       });
     }

@@ -152,5 +152,9 @@ angular.module('myApp', [
       appId: "1:19186869268:web:987b5d7fd56080ce86f301",
       measurementId: "G-5KLV02CGW0"
     };
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }else {
+      firebase.app(); // if already initialized, use that one
+    }
   })
